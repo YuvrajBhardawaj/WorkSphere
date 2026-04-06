@@ -1,0 +1,45 @@
+<header class="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+  <div class="flex h-14 items-center justify-between px-6">
+    
+    <!-- Left Side -->
+    <div class="flex items-center gap-2 font-semibold">
+      <div class="w-2 h-2 bg-primary rounded-full"></div>
+      <span class="text-sm tracking-tight">Dashboard</span>
+    </div>
+
+    <!-- Right Side -->
+    <div class="flex items-center gap-4">
+      
+      <!-- Search -->
+      <div class="relative hidden md:block w-56">
+        <svg class="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <input
+          type="search"
+          placeholder="Search..."
+          class="flex h-9 w-full rounded-md border border-border bg-transparent py-2 pl-8 pr-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+        />
+      </div>
+
+      <!-- Notifications -->
+      <button class="relative p-2 rounded-md hover:bg-accent hover:text-accent-foreground transition-colors" title="Notifications">
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+          <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+        </svg>
+        <span class="absolute top-1 right-1 h-2 w-2 bg-destructive rounded-full"></span>
+      </button>
+
+      <!-- User Avatar -->
+      <button class="flex items-center gap-2 rounded-md p-2 hover:bg-accent transition-colors">
+        <div class="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-xs font-semibold text-primary-foreground">
+          YU
+        </div>
+      </button>
+      
+    </div>
+
+  </div>
+</header>

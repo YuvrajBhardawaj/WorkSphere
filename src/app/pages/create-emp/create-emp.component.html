@@ -1,0 +1,66 @@
+<div class="max-w-xl bg-white p-6 rounded-xl border shadow-sm">
+  <h2 class="text-lg font-semibold mb-4">Add Employee</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+    <!-- Name -->
+    <input
+      type="text"
+      placeholder="Employee Name"
+      formControlName="name"
+      class="w-full border rounded-md px-3 py-2"
+    />
+
+    <!-- Error -->
+    <p
+      *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+      class="text-red-500 text-sm"
+    >
+      Name is required
+    </p>
+    <input
+      type="email"
+      placeholder="Email"
+      formControlName="email"
+      class="w-full border rounded-md px-3 py-2"
+    />
+
+    <input
+      type="password"
+      placeholder="Password"
+      formControlName="password"
+      class="w-full border rounded-md px-3 py-2"
+    />
+    <!-- Designation -->
+    <input
+      type="text"
+      placeholder="Designation"
+      formControlName="designation"
+      class="w-full border rounded-md px-3 py-2"
+    />
+
+    <!-- Experience -->
+    <input
+      type="number"
+      placeholder="Experience (years)"
+      formControlName="experience"
+      class="w-full border rounded-md px-3 py-2"
+    />
+
+    <!-- Role -->
+    <select formControlName="roleid" class="w-full border rounded-md px-3 py-2">
+      <option value="">Select Role</option>
+      @for (role of roles; track $index) {
+        <option [value]="role.id">{{ role.name | titlecase }} </option>
+      }
+    </select>
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      [disabled]="form.invalid"
+      class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 disabled:opacity-50"
+    >
+      Create Employee
+    </button>
+  </form>
+</div>

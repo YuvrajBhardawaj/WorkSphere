@@ -1,0 +1,57 @@
+<div class="max-w-xl bg-white p-6 rounded-xl border shadow-sm">
+
+  <h2 class="text-lg font-semibold mb-4">Create Project</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+
+    <!-- Title -->
+    <input
+      type="text"
+      placeholder="Project Title"
+      formControlName="title"
+      class="w-full border rounded-md px-3 py-2"
+    />
+
+    <!-- Description -->
+    <textarea
+      placeholder="Description"
+      formControlName="description"
+      class="w-full border rounded-md px-3 py-2"
+    ></textarea>
+
+    <!-- Assigned To -->
+    <select formControlName="assigned_to" class="w-full border rounded-md px-3 py-2">
+  <option value="">Select Manager</option>
+
+  <option *ngFor="let m of managers" [value]="m.id">
+    {{ m.name }}
+  </option>
+</select>
+
+    <!-- Days -->
+    <input
+      type="number"
+      placeholder="Days Allocated"
+      formControlName="days_allocated"
+      class="w-full border rounded-md px-3 py-2"
+    />
+
+    <!-- Status -->
+    <select formControlName="status" class="w-full border rounded-md px-3 py-2">
+      <option value="pending">Pending</option>
+      <option value="completed">Completed</option>
+      <option value="hold">On Hold</option>
+    </select>
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      [disabled]="form.invalid"
+      class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 disabled:opacity-50"
+    >
+      Create Project
+    </button>
+
+  </form>
+
+</div>
