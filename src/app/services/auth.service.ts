@@ -1,87 +1,94 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, filter, firstValueFrom } from 'rxjs';
 import { supabase } from '../supabase.client';
-import { User } from '@supabase/supabase-js';
-
-@Injectable({
-  providedIn: 'root'
-})
+import { UserToken } from '../interfaces/IAuth';
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-
-  private _user = new BehaviorSubject<User | null>(null);
+  private _user = new BehaviorSubject<UserToken | null | undefined>(undefined);
   user$ = this._user.asObservable();
 
-  private _role = new BehaviorSubject<string | null>(null);
-  role$ = this._role.asObservable();
+  // Single shared init promise — no matter how many times the service
+  // is touched, getSession() only runs ONCE
+  private _initPromise: Promise<void> | null = null;
 
   constructor() {
-    this.loadUser();
-    this.listenToAuthChanges(); // ✅ Fix 1: added auth state listener
+    this._initPromise = this.init();
   }
 
-  private listenToAuthChanges() {
-    supabase.auth.onAuthStateChange((_event, session) => {
-      const user = session?.user ?? null;
-      this._user.next(user);
+  private async init(): Promise<void> {
+    // Resolve current session exactly once
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
-      if (user) {
-        this.fetchRole(user.id);
-      } else {
-        this._role.next(null);
+    if (!session?.user) {
+      this._user.next(null);
+    } else {
+      const role = await this.fetchRole(session.user.id);
+      this._user.next({ id: session.user.id, role: role ?? 'employee' });
+    }
+
+    // Then watch for future changes
+    supabase.auth.onAuthStateChange(async (_event, session) => {
+      const user = session?.user;
+      if (!user) {
+        this._user.next(null);
+        return;
       }
+      const role = await this.fetchRole(user.id);
+      this._user.next({ id: user.id, role: role ?? 'employee' });
     });
   }
 
-  async loadUser() {
-    const { data, error } = await supabase.auth.getUser();
-
-    if (error) return;
-
-    const user = data?.user ?? null;
-    this._user.next(user);
-
-    if (user) {
-      await this.fetchRole(user.id);
-    }
+  waitForAuthReady(): Promise<UserToken | null> {
+    return firstValueFrom(
+      this._user.pipe(filter((user) => user !== undefined)),
+    ) as Promise<UserToken | null>;
   }
 
   async login(email: string, password: string) {
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
-      password
+      password,
     });
 
     if (error) throw error;
 
-    const user = data?.user;
-
+    const user = data.user;
     if (!user) throw new Error('User not found');
 
-    this._user.next(user);
-    await this.fetchRole(user.id);
+    const role = await this.fetchRole(user.id);
+
+    this._user.next({
+      id: user.id,
+      role: role ?? 'employee',
+    });
   }
 
   async logout() {
     await supabase.auth.signOut();
     this._user.next(null);
-    this._role.next(null);
   }
 
-  async fetchRole(userId: string) {
+  async fetchRole(userId: string): Promise<string | null> {
     const { data, error } = await supabase
-  .from('Profiles')
-  .select(`
-    roleid,
-    Roles!fk_profiles_role (
-      name
-    )
-  `)
-  .eq('id', userId)
-  .single();
+      .from('Profiles')
+      .select(
+        `
+        Roles!fk_profiles_role (
+          name
+        )
+      `,
+      )
+      .eq('id', userId)
+      .single();
 
-    if (error) return;
+    if (error) return null;
 
-    const roleName = (data as any)?.Roles?.name ?? null; // ✅ Fix 3: cast needed for joined table typing
-    this._role.next(roleName);
+    return (data as any)?.Roles?.name ?? null;
+  }
+
+  getUserValue(): UserToken | null | undefined {
+    return this._user.value;
   }
 }

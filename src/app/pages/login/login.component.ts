@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
     try {
       await this.auth.login(email, password);
-      // this.router.navigate(['/dashboard']);
+      this.router.navigate(['/dashboard']);
     } catch (err) {
       console.error(err);
       this.errorMessage = 'Login failed. Please check your credentials.'; // ✅ Fix 5 cont.

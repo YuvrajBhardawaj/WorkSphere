@@ -23,7 +23,7 @@ export class ViewEmployeesComponent {
 
   ngOnInit() {
     this.empService.employees$.pipe().subscribe((emps) => {
-      console.log(emps)
+      // console.log(emps)
       this.data = emps;
     });
   }
