@@ -9,13 +9,22 @@ export const supabase = createClient(
       autoRefreshToken: true,
       persistSession: true,
       detectSessionInUrl: true,
-      lock: (name, acquireTimeout, fn) => {
-        // Fall back gracefully if Web Locks API is unavailable or times out
+      lock: async (name, acquireTimeout, fn) => {
         if (typeof navigator === 'undefined' || !navigator.locks) {
+          return fn(); // fallback: no locking
+        }
+        try {
+          return await navigator.locks.request(
+            name,
+            { ifAvailable: false },  // wait properly, don't fail instantly
+            fn
+          );
+        } catch (e) {
+          // Lock failed — just run without lock rather than hanging
+          console.warn('Lock failed, running without lock:', e);
           return fn();
         }
-        return navigator.locks.request(name, { ifAvailable: false }, fn);
       },
     },
-  },
+  }
 );

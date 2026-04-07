@@ -24,6 +24,9 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+    this.auth.user$.subscribe(user => {
+      if (user) this.router.navigate(['/dashboard']);
+    });
   }
 
   async onSubmit() {

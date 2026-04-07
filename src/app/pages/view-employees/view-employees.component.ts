@@ -11,19 +11,17 @@ import { ViewEmployee } from '../../interfaces/IEmployee';
 })
 export class ViewEmployeesComponent {
   constructor(private empService: EmployeeService) {}
-
   displayedColumns: string[] = [
     'name',
     'designation',
     'experience',
-    'role', 
+    'role',
     'created',
   ];
   data: ViewEmployee[] = [];
 
   ngOnInit() {
-    this.empService.employees$.pipe().subscribe((emps) => {
-      // console.log(emps)
+    this.empService.employees$.subscribe((emps) => {
       this.data = emps;
     });
   }

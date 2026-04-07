@@ -21,7 +21,7 @@ export class EmployeeService {
       experience,
       created_at,
       roleid,
-      Roles!fk_profiles_role (
+      Roles(
         name
       )
     `);
@@ -72,6 +72,4 @@ export class EmployeeService {
 
     this.fetchEmployees();
   }
-
-  
 }

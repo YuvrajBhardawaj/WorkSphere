@@ -4,16 +4,20 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { supabase } from '../supabase.client';
 // auth.guard.ts
-export const authGuard: CanActivateFn = async () => {
-  const authService = inject(AuthService);
+export const authGuard: CanActivateFn = () => {
   const router = inject(Router);
 
-  const user = await authService.waitForAuthReady(); // waits for Supabase to respond
+  const session = supabase.auth.getSession(); // ❌ don’t await
 
-  if (!user) {
+  return session.then(({ data }) => {
+    const user = data.session?.user;
+
+    if (user) return true;
+
     router.navigate(['/signin']);
     return false;
-  }
-
-  return true;
+  }).catch(() => {
+    router.navigate(['/signin']);
+    return false;
+  });
 };

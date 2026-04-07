@@ -25,6 +25,7 @@ export class AuthService {
       this._user.next(null);
     } else {
       const role = await this.fetchRole(session.user.id);
+      console.log({ id: session.user.id, role: role ?? 'employee' })
       this._user.next({ id: session.user.id, role: role ?? 'employee' });
     }
 
@@ -75,7 +76,7 @@ export class AuthService {
       .from('Profiles')
       .select(
         `
-        Roles!fk_profiles_role (
+        Roles(
           name
         )
       `,
