@@ -9,6 +9,8 @@ import { managersListResolver } from './resolvers/managers-list.resolver';
 import { LayoutComponent } from './components/layout/layout.component';
 import { authGuard } from './guards/auth.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProjectListComponent } from './pages/project-list/project-list.component';
+import { projectListResolver } from './resolvers/project-list.resolver';
 
 export const routes: Routes = [
   {
@@ -18,7 +20,7 @@ export const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    canActivate: [authGuard],   // ← guard on the parent
+    canActivate: [authGuard],
     children: [
       {
         path: 'dashboard',
@@ -38,6 +40,11 @@ export const routes: Routes = [
         path: 'employees',
         component: ViewEmployeesComponent,
         resolve: { employees: viewEmpResolver },
+      },
+      {
+        path: 'projects',
+        component: ProjectListComponent,
+        resolve: { projects: projectListResolver },
       },
       {
         path: '',

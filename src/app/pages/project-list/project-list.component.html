@@ -1,0 +1,71 @@
+<div class="container mt-4">
+
+  <h2>Projects</h2>
+
+  <table mat-table [dataSource]="projects" class="mat-elevation-z8">
+
+  <!-- Serial Number -->
+  <ng-container matColumnDef="serial">
+    <th mat-header-cell *matHeaderCellDef> # </th>
+    <td mat-cell *matCellDef="let project; let i = index">
+      {{ (currentPage - 1) * pageSize + i + 1 }}
+    </td>
+  </ng-container>
+
+  <!-- Title -->
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef> Title </th>
+    <td mat-cell *matCellDef="let project"> {{ project.title }} </td>
+  </ng-container>
+
+  <!-- Created At -->
+  <ng-container matColumnDef="created_at">
+    <th mat-header-cell *matHeaderCellDef> Created </th>
+    <td mat-cell *matCellDef="let project">
+      {{ project.created_at | date:'mediumDate' }}
+    </td>
+  </ng-container>
+
+  <!-- Status -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let project">
+      <span [ngClass]="{
+        'text-warning': project.status === 'pending',
+        'text-success': project.status === 'completed',
+        'text-danger': project.status === 'hold'
+      }">
+        {{ project.status }}
+      </span>
+    </td>
+  </ng-container>
+
+  <!-- Assigned To -->
+  <ng-container matColumnDef="assigned_to">
+    <th mat-header-cell *matHeaderCellDef> Assigned To </th>
+    <td mat-cell *matCellDef="let project">
+      {{ project.assigned_to }}
+    </td>
+  </ng-container>
+
+  <!-- Rows -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+
+  <!-- Pagination Controls -->
+  <div class="d-flex justify-content-between mt-3">
+    <button mat-raised-button (click)="prevPage()" [disabled]="currentPage === 1">
+      Previous
+    </button>
+
+    <span>Page {{ currentPage }}</span>
+
+    <button mat-raised-button (click)="nextPage()"
+      [disabled]="currentPage * pageSize >= projects.length">
+      Next
+    </button>
+  </div>
+
+</div>
