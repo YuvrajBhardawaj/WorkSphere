@@ -4,7 +4,7 @@ import { RegisterUser } from '../interfaces/IAuth';
 import { ViewEmployee } from '../interfaces/IEmployee';
 import { HttpClient } from '@angular/common/http';
 import { ApiResponse, EmployeeDataResponse } from '../interfaces/IResponses';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
