@@ -5,5 +5,5 @@ export interface ViewEmployee {
   designation: string;
   experience: number | null;
   created_at?: string;
-  role: string | null;
+  role: string;
 }

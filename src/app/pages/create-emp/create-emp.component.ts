@@ -22,7 +22,7 @@ export class CreateEmpComponent {
   constructor(
     private fb: FormBuilder,
     private empService: EmployeeService,
-    private rolesService: RolesService
+    private rolesService: RolesService,
   ) {}
 
   ngOnInit() {
@@ -34,15 +34,16 @@ export class CreateEmpComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
-    this.rolesService.roles$.subscribe((roles)=>{
+    this.rolesService.roles$.subscribe((roles) => {
       this.roles = roles;
-    })
+    });
   }
 
   async onSubmit() {
     if (this.form.invalid) return;
-
-    await this.empService.createEmployee(this.form.value);
-    this.form.reset();
+    this.empService.createEmployee(this.form.value).subscribe({
+      next: () => this.form.reset(),
+      error: (err) => console.error(err),
+    });
   }
 }

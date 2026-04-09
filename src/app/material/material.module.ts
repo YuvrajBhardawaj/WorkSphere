@@ -16,7 +16,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatTreeModule} from '@angular/material/tree';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 const MaterialComponents = [
   CommonModule,
   MatProgressSpinnerModule,
@@ -33,7 +36,9 @@ const MaterialComponents = [
   MatSelectModule,
   MatListModule,
   MatToolbarModule,
-  MatTreeModule
+  MatTreeModule,
+  MatTooltipModule,
+  MatCheckboxModule,
 ];
 
 @NgModule({

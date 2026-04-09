@@ -22,6 +22,7 @@ export class ProjectListComponent implements OnInit {
     'created_at',
     'status',
     'assigned_to',
+    'days_allocated',
   ];
 
   constructor(private projectService: ProjectService) {}

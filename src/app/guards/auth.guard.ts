@@ -1,23 +1,20 @@
-
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { supabase } from '../supabase.client';
-// auth.guard.ts
+import { filter, map, take } from 'rxjs';
+
 export const authGuard: CanActivateFn = () => {
+  const auth = inject(AuthService);
   const router = inject(Router);
 
-  const session = supabase.auth.getSession(); // ❌ don’t await
+  return auth.user$.pipe(
+    filter(user => user !== undefined), // ⏳ wait for init (/me)
+    take(1), // only first value
+    map(user => {
+      if (user) return true;
 
-  return session.then(({ data }) => {
-    const user = data.session?.user;
-
-    if (user) return true;
-
-    router.navigate(['/signin']);
-    return false;
-  }).catch(() => {
-    router.navigate(['/signin']);
-    return false;
-  });
+      router.navigate(['/signin']);
+      return false;
+    })
+  );
 };

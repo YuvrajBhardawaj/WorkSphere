@@ -16,8 +16,14 @@ export const supabase = createClient(
         try {
           return await navigator.locks.request(
             name,
-            { ifAvailable: false },  // wait properly, don't fail instantly
-            fn
+            { ifAvailable: true },  // fail fast and fall back instead of hanging
+            async (lock) => {
+              if (!lock) {
+                // Lock not available, run without it
+                return fn();
+              }
+              return fn();
+            }
           );
         } catch (e) {
           // Lock failed — just run without lock rather than hanging

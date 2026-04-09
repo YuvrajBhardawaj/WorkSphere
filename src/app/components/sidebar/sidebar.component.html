@@ -11,7 +11,7 @@
         [class.opacity-0]="!isExpanded()"
         [class.translate-x-[-8px]]="!isExpanded()"
       >
-        Employee Panel
+        {{currentUser?.role | titlecase}} Panel
       </span>
     </div>
 
