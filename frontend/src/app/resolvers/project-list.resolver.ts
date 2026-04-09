@@ -4,6 +4,6 @@ import { inject } from '@angular/core';
 
 export const projectListResolver: ResolveFn<boolean> = async (route, state) => {
   const projectService = inject(ProjectService);
-  await projectService.loadProjects();
+  projectService.loadProjects().subscribe();
   return true;
 };

@@ -14,7 +14,7 @@ export class ProjectListComponent implements OnInit {
   projects: Project[] = [];
 
   currentPage = 1;
-  pageSize = 5;
+  pageSize = 10;
 
   displayedColumns: string[] = [
     'serial',
@@ -37,7 +37,7 @@ export class ProjectListComponent implements OnInit {
 
   loadProjects() {
     const offset = (this.currentPage - 1) * this.pageSize;
-    this.projectService.loadProjects(this.pageSize, offset);
+    this.projectService.loadProjects(this.pageSize, offset).subscribe();
   }
 
   nextPage() {

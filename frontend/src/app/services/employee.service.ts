@@ -4,6 +4,7 @@ import { RegisterUser } from '../interfaces/IAuth';
 import { ViewEmployee } from '../interfaces/IEmployee';
 import { HttpClient } from '@angular/common/http';
 import { ApiResponse, EmployeeDataResponse } from '../interfaces/IResponses';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class EmployeeService {
 
   createEmployee(emp: RegisterUser): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(
-      'http://localhost:3000/api/create-user',
+      `${environment.backendUrl}/create-user`,
       emp,
       { withCredentials: true },
     );
@@ -23,7 +24,7 @@ export class EmployeeService {
 
   fetchEmployees(): Observable<EmployeeDataResponse> {
     return this.http
-      .get<EmployeeDataResponse>('http://localhost:3000/api/employees', {
+      .get<EmployeeDataResponse>(`${environment.backendUrl}/employees`, {
         withCredentials: true,
       })
       .pipe(

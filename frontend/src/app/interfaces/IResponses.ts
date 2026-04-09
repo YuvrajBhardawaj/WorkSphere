@@ -1,4 +1,5 @@
 import { ViewEmployee } from "./IEmployee";
+import { Project } from "./IProject";
 
 export interface ApiResponse {
   success: boolean;
@@ -15,5 +16,11 @@ export interface LoginResponse {
 export interface EmployeeDataResponse {
   success: boolean;
   data?: ViewEmployee[];
+  message: string;
+}
+
+export interface ProjectDataResponse {
+  success: boolean;
+  data?: Project[]; 
   message: string;
 }
