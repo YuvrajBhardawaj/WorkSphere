@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { supabase } from '../supabase.client';
+
 import { Project } from '../interfaces/IProject';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ProjectDataResponse } from '../interfaces/IResponses';
@@ -16,19 +16,7 @@ constructor(private http: HttpClient) {}
   projects$ = this._projects.asObservable();
 
   async createProject(project: Project) {
-    const { error } = await supabase.from('Projects').insert([
-      {
-        title: project.title,
-        description: project.description,
-        assigned_to: project.assigned_to,
-        days_allocated: project.days_allocated,
-        status: project.status,
-      },
-    ]);
-
-    if (error) {
-      console.error(error);
-    }
+    
   }
 
   loadProjects(limit: number = 10, offset: number = 0): Observable<ProjectDataResponse> {
