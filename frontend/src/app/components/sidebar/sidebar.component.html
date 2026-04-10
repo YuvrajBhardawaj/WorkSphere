@@ -3,6 +3,7 @@
   class="fixed left-0 top-0 h-screen bg-[#171717] text-gray-400 flex flex-col transition-all duration-300 ease-in-out overflow-hidden"
 >
   <!-- Logo -->
+
   <div class="flex items-center h-14 px-4 border-b border-gray-800">
     <!-- Title -->
     <div class="overflow-hidden ml-3" [hidden]="!isExpanded()">
@@ -11,7 +12,7 @@
         [class.opacity-0]="!isExpanded()"
         [class.translate-x-[-8px]]="!isExpanded()"
       >
-        {{currentUser?.role | titlecase}} Panel
+        {{ currentUser?.role | titlecase }} Panel
       </span>
     </div>
 
@@ -39,14 +40,16 @@
       [class.gap-3]="isExpanded()"
     >
       <span class="text-lg">🏠</span>
-      <div class="overflow-hidden">
-        <span
-          class="whitespace-nowrap block transition-all duration-300"
-          [class.opacity-0]="!isExpanded()"
-          [class.translate-x-[-8px]]="!isExpanded()"
-          >Dashboard</span
-        >
-      </div>
+      @if (isExpanded()) {
+        <div class="overflow-hidden">
+          <span
+            class="whitespace-nowrap block transition-all duration-300"
+            [class.opacity-0]="!isExpanded()"
+            [class.translate-x-[-8px]]="!isExpanded()"
+            >Dashboard</span
+          >
+        </div>
+      }
     </a>
     @if (currentUser?.role === "admin") {
       <a
@@ -57,14 +60,16 @@
         [class.gap-3]="isExpanded()"
       >
         <span class="text-lg">👨‍💼</span>
-        <div class="overflow-hidden">
-          <span
-            class="whitespace-nowrap block transition-all duration-300"
-            [class.opacity-0]="!isExpanded()"
-            [class.translate-x-[-8px]]="!isExpanded()"
-            >Employees</span
-          >
-        </div>
+        @if (isExpanded()) {
+          <div class="overflow-hidden">
+            <span
+              class="whitespace-nowrap block transition-all duration-300"
+              [class.opacity-0]="!isExpanded()"
+              [class.translate-x-[-8px]]="!isExpanded()"
+              >Employees</span
+            >
+          </div>
+        }
       </a>
 
       <a
@@ -75,14 +80,16 @@
         [class.gap-3]="isExpanded()"
       >
         <span class="text-lg">➕</span>
-        <div class="overflow-hidden">
-          <span
-            class="whitespace-nowrap block transition-all duration-300"
-            [class.opacity-0]="!isExpanded()"
-            [class.translate-x-[-8px]]="!isExpanded()"
-            >Add Employee</span
-          >
-        </div>
+        @if (isExpanded()) {
+          <div class="overflow-hidden">
+            <span
+              class="whitespace-nowrap block transition-all duration-300"
+              [class.opacity-0]="!isExpanded()"
+              [class.translate-x-[-8px]]="!isExpanded()"
+              >Add Employee</span
+            >
+          </div>
+        }
       </a>
 
       <a
@@ -93,14 +100,16 @@
         [class.gap-3]="isExpanded()"
       >
         <span class="text-lg">📁</span>
-        <div class="overflow-hidden">
-          <span
-            class="whitespace-nowrap block transition-all duration-300"
-            [class.opacity-0]="!isExpanded()"
-            [class.translate-x-[-8px]]="!isExpanded()"
-            >Projects</span
-          >
-        </div>
+        @if (isExpanded()) {
+          <div class="overflow-hidden">
+            <span
+              class="whitespace-nowrap block transition-all duration-300"
+              [class.opacity-0]="!isExpanded()"
+              [class.translate-x-[-8px]]="!isExpanded()"
+              >Projects</span
+            >
+          </div>
+        }
       </a>
 
       <a
@@ -111,14 +120,16 @@
         [class.gap-3]="isExpanded()"
       >
         <span class="text-lg">➕</span>
-        <div class="overflow-hidden">
-          <span
-            class="whitespace-nowrap block transition-all duration-300"
-            [class.opacity-0]="!isExpanded()"
-            [class.translate-x-[-8px]]="!isExpanded()"
-            >Add Project</span
-          >
-        </div>
+        @if (isExpanded()) {
+          <div class="overflow-hidden">
+            <span
+              class="whitespace-nowrap block transition-all duration-300"
+              [class.opacity-0]="!isExpanded()"
+              [class.translate-x-[-8px]]="!isExpanded()"
+              >Add Project</span
+            >
+          </div>
+        }
       </a>
     }
 
@@ -132,14 +143,16 @@
       [class.gap-3]="isExpanded()"
     >
       <span class="text-lg">⚙️</span>
-      <div class="overflow-hidden">
-        <span
-          class="whitespace-nowrap block transition-all duration-300"
-          [class.opacity-0]="!isExpanded()"
-          [class.translate-x-[-8px]]="!isExpanded()"
-          >Settings</span
-        >
-      </div>
+      @if (isExpanded()) {
+        <div class="overflow-hidden">
+          <span
+            class="whitespace-nowrap block transition-all duration-300"
+            [class.opacity-0]="!isExpanded()"
+            [class.translate-x-[-8px]]="!isExpanded()"
+            >Settings</span
+          >
+        </div>
+      }
     </a>
   </nav>
 

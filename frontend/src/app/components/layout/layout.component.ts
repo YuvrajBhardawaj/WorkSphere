@@ -6,7 +6,7 @@ import { SidebarService } from '../../services/sidebar.service';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, NavbarComponent, SidebarComponent],
+  imports: [RouterOutlet, SidebarComponent],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
 })
