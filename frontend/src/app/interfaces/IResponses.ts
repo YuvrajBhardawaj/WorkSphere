@@ -1,4 +1,5 @@
 import { ViewEmployee } from "./IEmployee";
+import { MangersList } from "./IManager";
 import { Project } from "./IProject";
 
 export interface ApiResponse {
@@ -22,5 +23,22 @@ export interface EmployeeDataResponse {
 export interface ProjectDataResponse {
   success: boolean;
   data?: Project[]; 
+  message: string;
+}
+
+export interface CreateProjectResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface RoleDataResponse {
+  success: boolean;
+  data?: {id: string; name: string}[]; 
+  message: string;
+}
+
+export interface ManagersListResponse {
+  success: boolean;
+  data?: MangersList[]; 
   message: string;
 }

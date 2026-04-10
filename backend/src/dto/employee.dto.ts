@@ -5,3 +5,9 @@ export interface GetEmployeesResponse {
     data?: UserProfile[];
     message: string;
 }
+
+export interface GetManagerResponse {
+    success: boolean;
+    data?: {id: string; name: string;}[];
+    message: string;
+}

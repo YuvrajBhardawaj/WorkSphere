@@ -1,6 +1,7 @@
 import {
   CreateUserDto,
   CreateUserResponse,
+  GetUserRolesResponse,
   LoginResponse,
 } from "../dto/user.dto";
 import { supabaseAdmin } from "../supabaseClient";
@@ -85,5 +86,13 @@ export class AuthService {
         role,
       },
     };
+  }
+
+  async getUserRoles(): Promise<GetUserRolesResponse> {
+    const { data, error } = await supabaseAdmin.from("Roles").select("*");
+    if (error) {
+      throw new Error(error.message);
+    }
+    return { success: true, data, message: "Roles retrieved successfully" };
   }
 }

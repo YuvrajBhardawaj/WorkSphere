@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { AuthService } from '../services/auth.service';
 import { AuthRequest } from '../middlewares/auth.middleware';
-import { CreateUserResponse, LoginResponse } from '../dto/user.dto';
+import { CreateUserResponse, GetUserRolesResponse, LoginResponse } from '../dto/user.dto';
 
 const authService = new AuthService();
 
@@ -19,11 +19,11 @@ export const login = async (req: Request, res: Response<LoginResponse>) => {
     const { email, password } = req.body;
 
     const result = await authService.login(email, password);
-
+    const isProd = process.env.NODE_ENV === "production";
     res.cookie('token', result.token, {
       httpOnly: true,
-      secure: true, // true in production (HTTPS)
-      sameSite: 'none',
+      secure: isProd, // true in production (HTTPS)
+      sameSite: isProd ? "none" : "lax",
       maxAge: 24 * 60 * 60 * 1000
     });
 
@@ -43,4 +43,13 @@ export const getMe = (req: AuthRequest, res: Response) => {
     id: req.user.id,
     role: req.user.role
   });
+};
+
+export const getUserRoles = async (req: Request, res: Response<GetUserRolesResponse>) => {
+  try {
+    const result = await authService.getUserRoles();
+    res.json(result);
+  } catch (err: any) {
+    res.status(400).json({ success: false, message: err.message });
+  }
 };

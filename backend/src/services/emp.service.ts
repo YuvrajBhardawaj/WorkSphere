@@ -1,4 +1,4 @@
-import { GetEmployeesResponse } from '../dto/employee.dto';
+import { GetEmployeesResponse, GetManagerResponse } from '../dto/employee.dto';
 import { UserProfile } from '../dto/user.dto';
 import { supabaseAdmin } from '../supabaseClient';
 
@@ -31,5 +31,17 @@ export class EmpService {
     }));
 
     return { success: true, data: employees, message: "Employees retrieved successfully" };
+  }
+
+  async getManagers(): Promise<GetManagerResponse> {
+    const { data, error } = await supabaseAdmin
+      .from('Profiles')
+      .select('id, name, Roles!inner (name)')
+      .eq('Roles.name', 'manager'); // Assuming 'manager' is the role name for managers
+    const managers = (data || []).map((mgr: any) => ({
+      id: mgr.id,
+      name: mgr.name
+    }));
+    return { success: true, data: managers, message: "Managers retrieved successfully" };
   }
 }

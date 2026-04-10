@@ -30,3 +30,15 @@ export interface UserProfile {
   experience: number;
   role: string;
 }
+
+export interface GetUserRolesResponse {
+  success: boolean;
+  data?: {id: string; name: string;}[];
+  message: string;
+}
+
+export interface UserProfileResponse {
+  success: boolean;
+  data?: UserProfile;
+  message: string;
+}

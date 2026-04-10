@@ -4,6 +4,6 @@ import { RolesService } from '../services/roles.service';
 
 export const rolesResolver: ResolveFn<boolean> = async () => {
   const rolesService = inject(RolesService);
-  await rolesService.fetchRoles();
+  rolesService.fetchRoles().subscribe();
   return true;
 };

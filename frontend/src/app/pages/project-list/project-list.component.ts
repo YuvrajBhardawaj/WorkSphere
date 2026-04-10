@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Project } from '../../interfaces/IProject';
 import { ProjectService } from '../../services/project.service';
 import { MaterialModule } from '../../material/material.module';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-project-list',
-  imports: [MaterialModule],
+  imports: [MaterialModule, RouterLink],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.css',
 })
@@ -28,8 +29,6 @@ export class ProjectListComponent implements OnInit {
   constructor(private projectService: ProjectService) {}
 
   ngOnInit(): void {
-    this.loadProjects();
-
     this.projectService.projects$.subscribe((data: Project[]) => {
       this.projects = data;
     });

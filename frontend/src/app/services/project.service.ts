@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Project } from '../interfaces/IProject';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { ProjectDataResponse } from '../interfaces/IResponses';
+import { CreateProjectResponse, ProjectDataResponse } from '../interfaces/IResponses';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
@@ -15,8 +15,8 @@ constructor(private http: HttpClient) {}
   private _projects = new BehaviorSubject<Project[]>([]);
   projects$ = this._projects.asObservable();
 
-  async createProject(project: Project) {
-    
+  createProject(project: Project): Observable<CreateProjectResponse> {
+    return this.http.post<CreateProjectResponse>(`${environment.backendUrl}/projects`, project, { withCredentials: true });
   }
 
   loadProjects(limit: number = 10, offset: number = 0): Observable<ProjectDataResponse> {

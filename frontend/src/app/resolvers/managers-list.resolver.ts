@@ -4,6 +4,6 @@ import { ManagerService } from '../services/manager.service';
 
 export const managersListResolver: ResolveFn<boolean> = async (route, state) => {
   const mngService = inject(ManagerService);
-  await mngService.fetchManagers();
+  mngService.fetchManagers().subscribe();
   return true;
 };
