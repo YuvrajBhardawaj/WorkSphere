@@ -21,7 +21,7 @@ export class DashboardService {
         statusCounts,
       ).map(([status, count]) => ({ status, count }));
 
-      const totalOngoingProjects = statusCounts["active"] ?? 0;
+      const totalOngoingProjects = statusCounts["pending"] ?? 0;
 
       // Step 1: Reduce to Record<string, number>
       const monthlyCountMap = projectsData.reduce(

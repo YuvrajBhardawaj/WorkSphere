@@ -1,3 +1,4 @@
+import { EmployeeCount, ManagerCount, MonthlyProjectCreationCount, OngoingProjectsCount, ProjectStatusCount } from "./IDashboard";
 import { ViewEmployee } from "./IEmployee";
 import { MangersList } from "./IManager";
 import { Project } from "./IProject";
@@ -41,5 +42,17 @@ export interface RoleDataResponse {
 export interface ManagersListResponse {
   success: boolean;
   data?: MangersList[]; 
+  message: string;
+}
+
+export interface AdminDashboardResponse {
+  success: boolean;
+  data?: {
+    employeeCount: EmployeeCount;
+    managerCount: ManagerCount;
+    ongoingProjectsCount: OngoingProjectsCount;
+    projectStatusCounts: ProjectStatusCount[];
+    monthlyProjectCreationCounts: MonthlyProjectCreationCount[];
+  };
   message: string;
 }

@@ -12,46 +12,57 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
       <mat-card class="p-6 rounded-2xl shadow-lg">
         <p class="text-gray-500 text-sm">Ongoing Projects</p>
-        <h2 class="text-3xl font-bold mt-2 text-blue-600">10</h2>
+        <h2 class="text-3xl font-bold mt-2 text-blue-600">
+          {{ ongoingProjectsCount }}
+        </h2>
       </mat-card>
 
       <mat-card class="p-6 rounded-2xl shadow-lg">
         <p class="text-gray-500 text-sm">Total Employees</p>
-        <h2 class="text-3xl font-bold mt-2 text-green-600">200</h2>
+        <h2 class="text-3xl font-bold mt-2 text-green-600">
+          {{ employeeCount }}
+        </h2>
       </mat-card>
 
       <mat-card class="p-6 rounded-2xl shadow-lg">
         <p class="text-gray-500 text-sm">Total Managers</p>
-        <h2 class="text-3xl font-bold mt-2 text-purple-600">50</h2>
+        <h2 class="text-3xl font-bold mt-2 text-purple-600">
+          {{ managerCount }}
+        </h2>
       </mat-card>
     </div>
 
     <!-- 📈 Charts Section -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <!-- Bar Chart -->
-<mat-card class="p-6 rounded-2xl shadow-lg">
-  <h3 class="text-lg font-semibold mb-4">Monthly Projects</h3>
+      <mat-card class="p-6 rounded-2xl shadow-lg">
+        <h3 class="text-lg font-semibold mb-4">Monthly Projects</h3>
 
-  <div class="h-[300px]">
-    <canvas baseChart
-      [data]="barChartData"
-      [options]="chartOptions"
-      [type]="'bar'">
-    </canvas>
-  </div>
-</mat-card>
+        <div class="h-75">
+          <canvas
+            baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [type]="'bar'"
+          >
+          </canvas>
+        </div>
+      </mat-card>
 
-<!-- Doughnut Chart -->
-<mat-card class="p-6 rounded-2xl shadow-lg">
-  <h3 class="text-lg font-semibold mb-4">Project Status</h3>
+      <!-- Doughnut Chart -->
+      <mat-card class="p-6 rounded-2xl shadow-lg">
+        <h3 class="text-lg font-semibold mb-4">Project Status</h3>
 
-  <div class="h-[300px] flex items-center justify-center">
-    <canvas baseChart
-      [data]="doughnutChartData"
-      [options]="chartOptions"
-      [type]="'doughnut'">
-    </canvas>
-  </div>
-</mat-card>
+        <div class="h-75 flex items-center justify-center">
+          <canvas
+            baseChart
+            [data]="doughnutChartData"
+            [options]="doughnutChartOptions"
+            [type]="'doughnut'"
+          >
+          </canvas>
+        </div>
+      </mat-card>
+    </div>
   </div>
 </div>
