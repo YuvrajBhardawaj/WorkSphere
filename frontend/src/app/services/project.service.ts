@@ -16,7 +16,7 @@ constructor(private http: HttpClient) {}
   projects$ = this._projects.asObservable();
 
   createProject(project: Project): Observable<CreateProjectResponse> {
-    return this.http.post<CreateProjectResponse>(`${environment.backendUrl}/projects`, project, { withCredentials: true });
+    return this.http.post<CreateProjectResponse>(`${environment.backendUrl}/create-project`, project, { withCredentials: true });
   }
 
   loadProjects(limit: number = 10, offset: number = 0): Observable<ProjectDataResponse> {

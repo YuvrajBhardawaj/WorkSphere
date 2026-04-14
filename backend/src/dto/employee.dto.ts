@@ -3,6 +3,7 @@ import { UserProfile } from "./user.dto";
 export interface GetEmployeesResponse {
     success: boolean;
     data?: UserProfile[];
+    total?: number;
     message: string;
 }
 

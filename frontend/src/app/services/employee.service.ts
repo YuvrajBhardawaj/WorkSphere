@@ -13,6 +13,7 @@ export class EmployeeService {
   constructor(private http: HttpClient) {}
   private _employees = new BehaviorSubject<ViewEmployee[]>([]);
   employees$ = this._employees.asObservable();
+  total: number = 0;
 
   createEmployee(emp: RegisterUser): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(
@@ -22,15 +23,20 @@ export class EmployeeService {
     );
   }
 
-  fetchEmployees(): Observable<EmployeeDataResponse> {
+  fetchEmployees(
+    page: number = 1,
+    limit: number = 10,
+  ): Observable<EmployeeDataResponse> {
     return this.http
-      .get<EmployeeDataResponse>(`${environment.backendUrl}/employees`, {
-        withCredentials: true,
-      })
+      .get<EmployeeDataResponse>(
+        `${environment.backendUrl}/employees?page=${page}&limit=${limit}`,
+        { withCredentials: true },
+      )
       .pipe(
-        tap((res) => {
+        tap((res: EmployeeDataResponse) => {
           if (res.success && res.data) {
             this._employees.next(res.data);
+            this.total = res.total || 0;
           }
         }),
       );

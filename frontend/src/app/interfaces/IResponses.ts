@@ -17,6 +17,7 @@ export interface LoginResponse {
 export interface EmployeeDataResponse {
   success: boolean;
   data?: ViewEmployee[];
+  total?: number;
   message: string;
 }
 

@@ -22,7 +22,7 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.user$.subscribe((user) => {
+    this.authService.user$.subscribe((user: UserToken | null | undefined) => {
       if (user !== undefined) {
         this.currentUser = user; // now safely UserToken | null
       }

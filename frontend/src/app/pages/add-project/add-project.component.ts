@@ -42,7 +42,7 @@ export class AddProjectComponent {
   async onSubmit() {
     if (this.form.invalid) return;
 
-    await this.projectService.createProject(this.form.value);
+    this.projectService.createProject(this.form.value).subscribe();
 
     this.form.reset({
       status: 'pending',

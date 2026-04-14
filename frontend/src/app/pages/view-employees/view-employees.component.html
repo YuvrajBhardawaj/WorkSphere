@@ -1,6 +1,7 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50 p-6">
+<div
+  class="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-cyan-50 p-6"
+>
   <div class="max-w-7xl mx-auto">
-
     <!-- 🔷 Header -->
     <div class="flex items-center justify-between mb-8">
       <div class="flex items-center gap-4">
@@ -18,30 +19,41 @@
         </div>
       </div>
 
-      <a mat-raised-button color="primary"
-         class="rounded-xl shadow-md px-5 py-2"
-         routerLink="/addEmployee">
+      <a
+        mat-raised-button
+        color="primary"
+        class="rounded-xl shadow-md px-5 py-2"
+        routerLink="/addEmployee"
+      >
         + Add Employee
       </a>
     </div>
 
     <!-- 📊 Card -->
-    <mat-card class="rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-
+    <mat-card
+      class="rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+    >
       <!-- Table -->
       <div class="overflow-x-auto">
         <table mat-table [dataSource]="data" class="w-full">
-
           <!-- Serial -->
           <ng-container matColumnDef="serial">
-            <th mat-header-cell *matHeaderCellDef
-                class="bg-gray-50 text-gray-700 font-semibold w-16 text-center">
-              #
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="bg-gray-50 text-gray-700 font-semibold w-16 text-center"
+            >
+              S.No
             </th>
 
-            <td mat-cell *matCellDef="let row; let i = index"
-                class="py-4 text-center">
-              <span class="flex items-center justify-center w-9 h-9 rounded-full bg-blue-100 text-blue-700 font-bold shadow-sm">
+            <td
+              mat-cell
+              *matCellDef="let row; let i = index"
+              class="py-4 text-center"
+            >
+              <span
+                class="flex items-center justify-center w-9 h-9 rounded-full bg-blue-100 text-blue-700 font-bold shadow-sm"
+              >
                 {{ i + 1 }}
               </span>
             </td>
@@ -49,15 +61,19 @@
 
           <!-- Name -->
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef
-                class="bg-gray-50 text-gray-700 font-semibold">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="bg-gray-50 text-gray-700 font-semibold"
+            >
               Employee
             </th>
 
             <td mat-cell *matCellDef="let row" class="py-4">
               <div class="flex items-center gap-3">
-                
-                <div class="w-11 h-11 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400 text-white flex items-center justify-center font-bold shadow">
+                <div
+                  class="w-11 h-11 rounded-full bg-linear-to-br from-blue-400 to-cyan-400 text-white flex items-center justify-center font-bold shadow"
+                >
                   {{ row.name.charAt(0).toUpperCase() }}
                 </div>
 
@@ -72,13 +88,18 @@
 
           <!-- Designation -->
           <ng-container matColumnDef="designation">
-            <th mat-header-cell *matHeaderCellDef
-                class="bg-gray-50 text-gray-700 font-semibold">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="bg-gray-50 text-gray-700 font-semibold"
+            >
               Designation
             </th>
 
             <td mat-cell *matCellDef="let row" class="py-4">
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 shadow-sm">
+              <span
+                class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 shadow-sm"
+              >
                 {{ row.designation }}
               </span>
             </td>
@@ -86,13 +107,18 @@
 
           <!-- Experience -->
           <ng-container matColumnDef="experience">
-            <th mat-header-cell *matHeaderCellDef
-                class="bg-gray-50 text-gray-700 font-semibold">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="bg-gray-50 text-gray-700 font-semibold"
+            >
               Experience
             </th>
 
             <td mat-cell *matCellDef="let row" class="py-4">
-              <span class="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 shadow-sm">
+              <span
+                class="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 shadow-sm"
+              >
                 {{ row.experience }} yrs
               </span>
             </td>
@@ -100,76 +126,91 @@
 
           <!-- Role -->
           <ng-container matColumnDef="role">
-            <th mat-header-cell *matHeaderCellDef
-                class="bg-gray-50 text-gray-700 font-semibold">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="bg-gray-50 text-gray-700 font-semibold"
+            >
               Role
             </th>
 
             <td mat-cell *matCellDef="let row" class="py-4">
-
-              <span *ngIf="row.role === 'manager'"
-                    class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-700">
+              <span
+                *ngIf="row.role === 'manager'"
+                class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-700"
+              >
                 Manager
               </span>
 
-              <span *ngIf="row.role === 'employee'"
-                    class="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700">
+              <span
+                *ngIf="row.role === 'employee'"
+                class="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700"
+              >
                 Employee
               </span>
 
-              <span *ngIf="row.role === 'admin'"
-                    class="px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700">
+              <span
+                *ngIf="row.role === 'admin'"
+                class="px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700"
+              >
                 Admin
               </span>
-
             </td>
           </ng-container>
 
           <!-- Header -->
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"
-              class="border-b border-gray-200">
-          </tr>
+          <tr
+            mat-header-row
+            *matHeaderRowDef="displayedColumns"
+            class="border-b border-gray-200"
+          ></tr>
 
           <!-- Rows -->
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-              class="border-b border-gray-100 cursor-default">
-          </tr>
-
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            class="border-b border-gray-100 cursor-default"
+          ></tr>
         </table>
       </div>
 
       <!-- 🔥 Footer (Projects-style pagination instead of plain paginator) -->
-      <div class="flex items-center justify-between px-4 py-4 bg-white border-t">
+      <div
+        class="flex items-center justify-between px-4 py-4 bg-white border-t"
+      >
+        <p class="text-sm text-gray-500">Showing {{ data.length }} employees</p>
 
-        <p class="text-sm text-gray-500">
-          Showing {{ data.length }} employees
-        </p>
+        <div
+          class="flex items-center justify-between px-4 py-4 bg-white border-t"
+        >
 
-        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-3">
+            <button
+              mat-stroked-button
+              (click)="prevPage()"
+              [disabled]="currentPage === 1"
+              class="rounded-lg"
+            >
+              ← Previous
+            </button>
 
-          <button mat-stroked-button
-                  (click)="prevPage()"
-                  [disabled]="currentPage === 1"
-                  class="rounded-lg">
-            ← Previous
-          </button>
+            <span class="text-gray-700 font-medium">
+              Page
+              <span class="font-bold text-blue-600">{{ currentPage }}</span>
+            </span>
 
-          <span class="text-gray-700 font-medium">
-            Page <span class="font-bold text-blue-600">{{ currentPage }}</span>
-          </span>
-
-          <button mat-raised-button color="primary"
-                  (click)="nextPage()"
-                  [disabled]="currentPage * pageSize >= data.length"
-                  class="rounded-lg shadow">
-            Next →
-          </button>
-
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="nextPage()"
+              [disabled]="currentPage * pageSize >= total"
+              class="rounded-lg shadow"
+            >
+              Next →
+            </button>
+          </div>
         </div>
-
       </div>
-
     </mat-card>
-
   </div>
 </div>

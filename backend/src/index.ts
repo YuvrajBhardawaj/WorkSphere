@@ -5,6 +5,7 @@ dotenv.config();
 import authRouter from './routers/auth.routes';
 import empRouter from './routers/emp.routes';
 import projectRouter from './routers/project.routes';
+import dashboardRouter from './routers/dashboard.routes';
 import cookieParser from 'cookie-parser';
 const app = express();
 
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 app.use('/api', authRouter);
 app.use('/api', empRouter);
 app.use('/api', projectRouter);
+app.use('/api', dashboardRouter);
 
 app.listen(3000, () => {
   console.log('Server running on http://localhost:3000');
