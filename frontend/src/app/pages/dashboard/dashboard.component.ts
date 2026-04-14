@@ -23,21 +23,21 @@ export class DashboardComponent implements OnInit {
     maintainAspectRatio: false,
   };
   barChartOptions: ChartConfiguration<'bar'>['options'] = {
-  responsive: true,
-  maintainAspectRatio: false,
-  scales: {
-    y: {
-      ticks: {
-        precision: 0
-      }
-    }
-  }
-};
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        ticks: {
+          precision: 0,
+        },
+      },
+    },
+  };
 
-doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
-  responsive: true,
-  maintainAspectRatio: false,
-};
+  doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
   barChartData: ChartConfiguration<'bar'>['data'] = {
     labels: [],
     datasets: [{ label: 'Projects', data: [], backgroundColor: '#3b82f6' }],
@@ -76,8 +76,11 @@ doughnutChartOptions: ChartConfiguration<'doughnut'>['options'] = {
     const sorted = [...monthlyData].sort((a, b) =>
       a.month.localeCompare(b.month),
     );
+
     this.barChartData = {
-      labels: sorted.map((m) => m.month),
+      labels: sorted.map((m) =>
+        new Date(m.month + '-01').toLocaleString('default', { month: 'short' }),
+      ),
       datasets: [
         {
           label: 'Projects',
